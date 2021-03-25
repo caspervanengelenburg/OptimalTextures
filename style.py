@@ -3,7 +3,7 @@ import sys
 import torch
 import torchvision
 from tqdm import tqdm
-
+from sklearn.decomposition import PCA
 import util
 from histmatch import *
 from vgg import Decoder, Encoder
@@ -34,14 +34,24 @@ def random_rotation(N):
 
 
 if __name__ == "__main__":
-    style = util.load_image(sys.argv[1])
+    style = util.load_image("style/graffiti.jpg")
     output = torch.rand(style.shape, device=device)
-
+    PCADimension = [30, 100, 200, 400, 250]
+    U = [None]
+    S = [None]
+    V = [None]
     style_layers = [None]  # add one to index so it works better in next loop
     for layer in range(1, 6):
         with Encoder(layer).to(device) as encoder:
             enc_s = encoder(style).squeeze().permute(1, 2, 0)  # remove batch channel and move channels to last axis
-            style_layers.append(enc_s.reshape(-1, enc_s.shape[2]))  # [pixels, channels]
+            enc_s = enc_s.reshape(-1, enc_s.shape[2]) # [pixels, channels]
+            print(enc_s.shape)
+            # [pixels, channels PCA reduces]
+            U_s, S_s, V_s = torch.pca_lowrank(enc_s, q=PCADimension[layer-1])
+            U.append(U_s)
+            S.append(S_s)
+            V.append(V_s)
+            style_layers.append(torch.matmul(enc_s, V_s)) # Data projected on the principal components
 
     # multiple resolutions (e.g. each pass can be done for a new resolution ?)
     num_passes = 5
@@ -53,12 +63,13 @@ if __name__ == "__main__":
                 output_layer = encoder(output).squeeze().permute(1, 2, 0)
                 h, w, c = output_layer.shape
                 output_layer = output_layer.reshape(-1, c)  # [pixels, channels]
+                dataFirstPrincipalComponents = torch.matmul(output_layer, V[layer]) # output image projected on first principal components
+                c_pca = PCADimension[layer-1]
 
-            for it in range(int(c / num_passes)):
-                rotation = random_rotation(c)
-
+            for it in range(int(c_pca / num_passes)):
+                rotation = random_rotation(c_pca)
                 proj_s = style_layers[layer] @ rotation
-                proj_o = output_layer @ rotation
+                proj_o = dataFirstPrincipalComponents @ rotation
 
                 match_o = hist_match(proj_o, proj_s)
 
@@ -67,6 +78,7 @@ if __name__ == "__main__":
                 pbar.update(1)
 
             with Decoder(layer).to(device) as decoder:
-                output = decoder(output_layer.T.reshape(1, c, h, w))
+                output = torch.matmul(output_layer, V[layer].T)
+                output = decoder(output.T.reshape(1, c, h, w))
 
     torchvision.utils.save_image(torch.cat((style, output)), "output/texture.png")
