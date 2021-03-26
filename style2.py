@@ -47,11 +47,11 @@ if __name__ == "__main__":
             enc_s = enc_s.reshape(-1, enc_s.shape[2]) # [pixels, channels]
             print(enc_s.shape)
             # [pixels, channels PCA reduces]
-            U_s, S_s, V_s = torch.pca_lowrank(enc_s, q=PCADimension[layer-1])
+            U_s, S_s, V_s = torch.svd(enc_s)
             U.append(U_s)
             S.append(S_s)
             V.append(V_s)
-            style_layers.append(torch.matmul(enc_s, V_s)) # Data projected on the principal components
+            style_layers.append(torch.matmul(enc_s, V_s[:,:PCADimension[layer-1]])) # Data projected on the principal components
 
     # multiple resolutions (e.g. each pass can be done for a new resolution ?)
     num_passes = 5
