@@ -1,5 +1,5 @@
 import colorsys
-
+from matplotlib import pyplot as PLT
 import torchvision
 import torchvision.transforms.functional as transforms
 from PIL import Image
@@ -50,17 +50,18 @@ if __name__ == "__main__":
     Lout = np.zeros([height, width])
 
     output = np.zeros([height, width, 3])
+    print(output.shape)
     for i in range(height):
         for j in range(width):
             pixelI = i*width + j
-            print(Rcont[pixelI], Gcont[pixelI], Bcont[pixelI])
             Hcont[i][j], Lcont[i][j], Scont[i][j] = colorsys.rgb_to_hls(Rcont[pixelI], Gcont[pixelI], Bcont[pixelI])
             Hout[i][j], Lout[i][j], Sout[i][j] = colorsys.rgb_to_hls(Rout[pixelI], Gout[pixelI], Bout[pixelI])
             r,g,b = colorsys.hls_to_rgb(Hcont[i][j], Lcont[i][j], Scont[i][j])
-            print(r*255.0, g*255.0, b*255.0)
-            output[i][j][0], output[i][j][1], output[i][j][2] = r*255.0, g*255.0, b*255.0
-    print(output)
+            output[i][j][0], output[i][j][1], output[i][j][2] = r, g, b
 
+    print(output.shape)
+    PLT.imshow(output)
+    PLT.show()
     img = Image.fromarray(output, 'RGB')
     img.save('output.png')
 
