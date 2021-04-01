@@ -40,6 +40,7 @@ def optimal_texture(
     # load inputs and initialize output image
     styles = util.load_styles(style, size=sizes[0], scale=style_scale)
     content = util.maybe_load_content(content, size=sizes[0])
+    print(content.shape)
     output = torch.rand(content.shape if content is not None else (1, 3, sizes[0], sizes[0]), device=device)
 
     # transform style and content to VGG feature space
@@ -209,12 +210,12 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-s", "--style", type=str, nargs="+", action=required_length(1, 2), default="style/graffiti.jpg"
+        "-s", "--style", type=str, nargs="+", action=required_length(1, 2), default=["style/green-paint-large.jpg"]
     )
-    parser.add_argument("-c", "--content", type=str, default=None)
-    parser.add_argument("--size", type=int, default=512)
-    parser.add_argument("--style_scale", type=float, default=1)
-    parser.add_argument("--content_strength", type=float, default=0.01)
+    parser.add_argument("-c", "--content", type=str, default="content/city-large.jpg")
+    parser.add_argument("--size", type=int, default=3840)
+    parser.add_argument("--style_scale", type=float, default=0.333)
+    parser.add_argument("--content_strength", type=float, default=0.075)
     parser.add_argument("--mixing_alpha", type=float, default=0.5)
     parser.add_argument("--hist_mode", type=str, choices=["sym", "pca", "chol", "cdf"], default="cdf")
     parser.add_argument("--no_pca", action="store_true")
