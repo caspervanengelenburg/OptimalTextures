@@ -20,81 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21f6ce77-3905-47f4-bec3-7f03c2e8db9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/luminanceTransfer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optex.py" beforeDir="false" afterPath="$PROJECT_DIR$/optex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti-large-no-pca.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti-large-pca.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti-no-style-scale.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti-small_xo-small_blend_0.333_bridge_strength_0.03_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti-small_xo-small_blend_0.5_bridge_0.01_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti-small_xo-small_blend_0.5_bridge_strength_0.03_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti-style-scaling.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti0.125_cdf_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti5120.125_chol_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti5120.25_pca_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti5120.25_sym_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti_cdf_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti_chol_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti_pth_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/graffiti_vec_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-large_city-large_strength_0.01_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-large_city-large_strength_0.05_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-large_city-large_strength_0.05_scale_0.5_1024.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-large_city-large_strength_0.075_cdfhist_scale_0.333_2048.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-large_city-large_strength_0.075_cholhist_scale_0.333_2048.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-large_city-large_strength_0.075_pcahist_scale_0.333_2048.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-large_city-large_strength_0.075_symhist_scale_0.333_2048.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-large_city-large_strength_0.15_no_multires_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-large_city-large_strength_0.1_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-large_city-large_strength_0.2_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-large_city-large_strength_1.0_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/green-paint-small_city-large_strength_1.0_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-pca-hist-match.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.0-345.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.01-45.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.25-345.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.25-45.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.25.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.5-345.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.5-45.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.75-345.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.75-45.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket0.75.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket1.0-345.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket1.0-45.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket1.0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket_0.001_chol_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket_0.01_chol_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket_0.1_chol_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lava-smallrocket_1.0_chol_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lavarocket0.25-345.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lavarocket0.25-5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lavarocket0.25.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lavarocket0.5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lavarocket1-5-hist-match-pca.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lavarocket1-5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/lavarocket1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/marble-no-pca.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/marble-pca.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/starry-night-large_chol_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/starry-night-large_chol_pca_multires_500.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/starry-night-largebridge_0.005_chol_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/starry-night-largebridge_0.05_chol_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/starry-night-largebridge_0.125_chol_pca_multires.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/zebra_pattern-small_blend_0.0_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/zebra_pattern-small_blend_0.1_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/zebra_pattern-small_blend_0.2_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/zebra_pattern-small_blend_0.3_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/zebra_pattern-small_blend_0.4_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/zebra_pattern-small_blend_0.5_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/zebra_pattern-small_blend_0.6_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/zebra_pattern-small_blend_0.7_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/zebra_pattern-small_blend_0.8_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/zebra_pattern-small_blend_0.9_512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/zebra_pattern-small_blend_1.0_512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/luminanceTransfer.py" beforeDir="false" afterPath="$PROJECT_DIR$/luminanceTransfer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.png" beforeDir="false" afterPath="$PROJECT_DIR$/output.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,22 +133,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="484" y="0" key="#optex/0.0.1536.824@0.0.1536.824" timestamp="1617276426637" />
-    <state width="1492" height="152" key="GridCell.Tab.0.bottom" timestamp="1617294404999">
+    <state width="1492" height="152" key="GridCell.Tab.0.bottom" timestamp="1617296116017">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="152" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617294404999" />
-    <state width="1492" height="152" key="GridCell.Tab.0.center" timestamp="1617294404999">
+    <state width="1492" height="152" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617296116017" />
+    <state width="1492" height="152" key="GridCell.Tab.0.center" timestamp="1617296116017">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="152" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1617294404999" />
-    <state width="1492" height="152" key="GridCell.Tab.0.left" timestamp="1617294404998">
+    <state width="1492" height="152" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1617296116017" />
+    <state width="1492" height="152" key="GridCell.Tab.0.left" timestamp="1617296116016">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="152" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1617294404998" />
-    <state width="1492" height="152" key="GridCell.Tab.0.right" timestamp="1617294404999">
+    <state width="1492" height="152" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1617296116016" />
+    <state width="1492" height="152" key="GridCell.Tab.0.right" timestamp="1617296116017">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1492" height="152" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1617294404999" />
+    <state width="1492" height="152" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1617296116017" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1617271946117">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

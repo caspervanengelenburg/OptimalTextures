@@ -34,14 +34,13 @@ if __name__ == "__main__":
     imgOut_sequence = imgOut.getdata()
     imgOut_array = np.array(imgOut_sequence)
 
-    Rcont = imgCont_array[:, 0]
-    print(Rcont)
-    print(Rcont.shape)
-    Gcont = imgCont_array[:, 1]
-    Bcont = imgCont_array[:, 2]
-    Rout = imgOut_array[:, 0]
-    Gout = imgOut_array[:, 1]
-    Bout = imgOut_array[:, 2]
+    Rcont = imgCont_array[:, 0]/255.0
+    Gcont = imgCont_array[:, 1]/255.0
+    Bcont = imgCont_array[:, 2]/255.0
+
+    Rout = imgOut_array[:, 0]/255.0
+    Gout = imgOut_array[:, 1]/255.0
+    Bout = imgOut_array[:, 2]/255.0
 
     Hcont = np.zeros([height, width])
     Scont = np.zeros([height, width])
@@ -54,9 +53,12 @@ if __name__ == "__main__":
     for i in range(height):
         for j in range(width):
             pixelI = i*width + j
+            print(Rcont[pixelI], Gcont[pixelI], Bcont[pixelI])
             Hcont[i][j], Lcont[i][j], Scont[i][j] = colorsys.rgb_to_hls(Rcont[pixelI], Gcont[pixelI], Bcont[pixelI])
             Hout[i][j], Lout[i][j], Sout[i][j] = colorsys.rgb_to_hls(Rout[pixelI], Gout[pixelI], Bout[pixelI])
-            output[i][j][0], output[i][j][1], output[i][j][2] = colorsys.hls_to_rgb(Hcont[i][j], Lout[i][j], Scont[i][j])
+            r,g,b = colorsys.hls_to_rgb(Hcont[i][j], Lcont[i][j], Scont[i][j])
+            print(r*255.0, g*255.0, b*255.0)
+            output[i][j][0], output[i][j][1], output[i][j][2] = r*255.0, g*255.0, b*255.0
     print(output)
 
     img = Image.fromarray(output, 'RGB')
