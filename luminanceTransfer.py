@@ -56,10 +56,11 @@ if __name__ == "__main__":
             pixelI = i*width + j
             Hcont[i][j], Lcont[i][j], Scont[i][j] = colorsys.rgb_to_hls(Rcont[pixelI], Gcont[pixelI], Bcont[pixelI])
             Hout[i][j], Lout[i][j], Sout[i][j] = colorsys.rgb_to_hls(Rout[pixelI], Gout[pixelI], Bout[pixelI])
-            r,g,b = colorsys.hls_to_rgb(Hcont[i][j], Lcont[i][j], Scont[i][j])
+            r,g,b = colorsys.hls_to_rgb(Hcont[i][j], Lout[i][j], Scont[i][j])
             output[i][j][0], output[i][j][1], output[i][j][2] = r, g, b
 
     print(output.shape)
+    output.resize([576, 1024, 3])
     PLT.imshow(output)
     PLT.show()
     img = Image.fromarray(output, 'RGB')
