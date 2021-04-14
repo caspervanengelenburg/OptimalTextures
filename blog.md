@@ -1,11 +1,17 @@
 # Replicating "Optimal Textures: Fast and Robust Texture Synthesis and Style Transfer through Optimal Transport"
 
+CASPER: ik geef comments voor elke section aan de onderkant ervan.
+
 Hans Brouwer & Jim Kok
 
 In this post we give an overview of our replication of the paper [Optimal Textures: Fast and Robust Texture Synthesis and Style Transfer through Optimal Transport](https://arxiv.org/abs/2010.14702) for the [Delft University of Technology Deep Learning course CS4240](https://cs4240tud.github.io/). Our implementation in PyTorch can be found [here](https://github.com/JCBrouwer/OptimalTextures).
 
+COMMENT CASPER: not only replication, but also things like 1. additional (more in-depth) explanations, 2. discussion of yours and their results (comparison), 3. comparison of comparable techniques, 4. improvements (mostly in terms of implementation). I should mention, at least partly, those as well. 
+
 ## Overview
 Optimal Textures presents a new approach for texture synthesis and several other related tasks. The algorithm can directly optimize the histograms of intermediate features of an image recognition model (VGG-19) to match the statistics of a target image. This avoids the costly backpropagation which is required by other approaches which try to instead match 2nd order statistics like the Gram matrix (the correlations between intermediate features). Compared to other algorithms which seek to speed up texture synthesis, Optimal Textures achieves a better quality in less time.
+
+COMMENT CASPER: You do not explain why histograms yield better performance (quality and timewise). Might be good to include that (or at least give a glimpse of why) in either this section or an intermediate (added) section between this and the following. If you'd like to write a blog for say more "lay" people, you could also include how features are compared in the first place (for both correlations as well as their histograms, or one of them): might want to use some visuals in this case. 
 
 The approach builds on a VGG-19 autoencoder which is trained to invert internal features of a pretrained VGG-19 network back to an image. This was originally introduced by Li et al. in [Universal Style Transfer via Feature Transforms](https://arxiv.org/abs/1705.08086). This autoencoder allows one to encode an image to feature space, perform a direct optimization on these features, and then decode back to an image.
 
@@ -27,6 +33,8 @@ Source: <a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.458.7
 </div>
 </div>
 
+COMMENT CASPER (last three pieces including the graphic): Although the explanations are clear, you might want to include some visuals that 1. exlain how features are retrieved from the VGG-19 encoder and 2. how a random rotations looks like in for example 2D/3D (basically like you do with the histogram matching example). You could even include a visual diagram that provides the whole cycle. 
+
 ### Speeding things up
 This relatively simple algorithm can be augmented by a couple techniques that improve the speed and quality of results.
 
@@ -34,14 +42,20 @@ The first technique is to project the matched features to a smaller subspace and
 
 The second technique is to synthesize images starting from a small resolution (256 pixels) and progressively upscaling during optimization to the desired size. Once again, this reduces the size of the feature tensors (this time along the spatial axes) which improves speed. Another benefit is that longer-range relations in the example image are captured as the receptive field of VGG-19's convolutions is larger for the smaller starting images.
 
+COMMENT CASPER: I am not entirely sure if smaller input images yield, if using the same networks, an increased receptive fields. I mean the argument makes sense, but strictly speaking the receptive field of a network is defined upon the amount of neurons the output is "connected" with. I might see this the wrong way; let me know.
+
 ### Extensions
 The paper further shows how the basic algorithm can be used for multiple tasks similar to texture synthesis: style transfer, color transfer, texture mixing, and mask-guided synthesis.
+
+COMMENT CASPER: it might be a good thing to specify in the next sections, in math, how the extensions alter the way the "updated" layers are computed. It simply makes the reader understand better what must be done specifically. You might as well consider to give examples (images) - to make the reader understand what the extension is in the first place. Especially in the case of mask-guided synthesis this would be beneficial. 
 
 #### Style transfer
 To achieve style transfer, a content image's features are added into the mix. The features of the deepest three layers of the output image are interpolated toward the features of the content image. Notably, the content image's features must be centered around the mean of the style image's features to ensure the two are not tugging the output image back and forth between distant parts of feature space.
 
 #### Color transfer
 The naive approach to color transfer would be to directly apply the optimal transport algorithm to the images themselves rather to their features. However, the paper introduces an extension of this which preserves the colors of the content image a little better. The basis for this technique is luminance transfer, which takes the hue and saturation channels of the content image (in HSL space) and substitutes them into the output of the optimal transport style transfer. The drawback of luminance transfer is that the finer colored details in the style are no longer present, instead directly taking the color of the underlying content. To remedy this, a few final iterations of the optimal transport algorithm are applied with the luminance transfered output as target. This gives a happy medium between the content focused color transfer of the luminance approach and the style focused color transfer of the naive optimal transfer approach.
+
+COMMENT CASPER: "... are no longer present, - but - instead ... "
 
 #### Texture mixing
 Another task which the paper applies the new algorithm to is texture mixing. Here, two styles should be blended into a texture which retains aspects of both. To achieve this, the target feature tensors are edited to have aspects of both styles. First the optimal transport mapping from the first style to the second and from the second style to the first is calculated. This is as simple as matching the histogram of each style with the histogram of the other as target. This gives 4 feature tensors that are combined to form the new target.
@@ -51,6 +65,8 @@ A blending value between 0 and 1 is introduced to control the weight of each sty
 Next a binary mixing mask is introduced with the percentage of ones corresponding to the blending value. This mask is used to mix between the two interpolated style features. When the blend value is low, the majority of pixels in the feature tensor will be from the first style's feature tensor, when it's high the majority comes from the second style.
 
 This is repeated at each depth in the VGG autoencoder. These doubly blended feature targets are then directly used in the rest of the optimization, which proceeds as usual.
+
+COMMENT CASPER: a lot of steps here. You could, as you did in an earlier section, itemize it. Becomes more obvious in that way.
 
 #### Mask-guided synthesis
 The final application of optimal textures is mask-guided synthesis. In this task, a style image, style mask, and content mask are used as input. The parts of the style image corresponding to each label in the style mask are then synthesized in the places where each label is present in the content mask.
@@ -68,8 +84,12 @@ One thing to note is that we follow pseudo-code from the paper which seems to in
 
 Once features are encoded, we need to rotate before matching their histograms. To this end, we draw random rotation matrices from the [Special Orthogonal Group](https://en.wikipedia.org/wiki/Orthogonal_group). These are matrices that can perform any N-dimensional rotation and have the handy property that their transpose is also their inverse. We've translated to PyTorch [SciPy's function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.special_ortho_group.html#scipy.stats.special_ortho_group) that can draw uniformly from the N-dimensional special orthogonal group (giving us uniformly distributed random rotations). For each iteration, we draw a random matrix, rotate by multiplying both the style and output features by this matrix, perform histogram matching, and then rotate back by multiplying with the transpose of the rotation matrix.
 
+COMMENT CASPER: you might want to include pseudo-code here (an improved version of the one which is in the paper).
+
 ### Histogram matching
 Matching N-channel histograms is the true heart of Optimal Textures. Therefore it is important that this part of the algorithm is fast. The classic way of matching histograms is to convert both histograms to CDFs and then use the source CDF as a look up table to remap each color intensity in the target CDF.
+
+COMMENT CASPER: fast and reliable?
 
 <figure style="text-align: center; text-color: gray; font-size: 11px">
 <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Histmatching.svg" width="400"/>
@@ -115,8 +135,12 @@ Each basis gives slightly different results, although in general they are compar
 </figure>
 </div>
 
+COMMENT CASPER: captions are not entirely clear. 
+
 ### PCA
 To speed up optimization, we decompose the feature tensors of both images to a set of principal components. These are chosen such that they capture 90% of the total variance in the style features at a given layer depth. These principal components lie along the axes which most contribute to a style's "character" and so it is sufficient to focus only on optimizing these most important directions. Despite reducing the dimensionality of the features significantly, the effect on quality is minimal as can be seen in the figure below.
+
+COMMENT CASPER: You could include one of the papers plots that, if you aim at keeping 90% of the information, already reduces the amount of necessary features a lot (slightly depending on the layer number). 
 
 <br>
 <div style="text-align: center">
